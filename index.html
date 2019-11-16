@@ -4,8 +4,9 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <title>Translinked - Translink Web Transit Application</title>
-    <style>
+
+      <title>Translinked - Translink Web Transit Application</title>
+      <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -18,6 +19,41 @@
         padding: 0;
       }
     </style>
+    <script>
+        function callAPI() {
+                            
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.translink.ca/rttiapi/v1/stops/" + document.getElementById("textStopNumber") + "?apikey=YJw6wpdzRarjhQFYnCJ6",
+            "dataType": "xml",
+            "type": "GET",
+            "cache": false,
+            }
+          
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+            var content = response;
+           // $("#busStats").append(content);           
+           document.getElementById("busStats").innerHTML = response;
+          });
+       }
+       
+       function initMap() {
+         var map = new google.maps.Map(document.getElementById('map'), {
+           zoom: 13,
+           center: {lat: 49.2576508, lng: -123.2639868}
+         });
+ 
+         var trafficLayer = new google.maps.TrafficLayer();
+         trafficLayer.setMap(map);
+       }
+     </script>
+     <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbBAeilwetaQpLD44o1sXuWrcIjavvqI0&callback=initMap">
+     </script>
+</script>
+    
   </head>
   <body>
     <h1 align="center">this is translinked</h1>
@@ -27,40 +63,8 @@
     <p>Statistics for bus route</p>
     <span id="busStats"></span>
     <div id="map"></div>
-    <script>
-
-
-      function callAPI() {
-                           
-         var settings = {
-           "async": true,
-           "crossDomain": true,
-           "url": "https://api.translink.ca/rttiapi/v1/stops/" + document.getElementById("textStopNumber") + "?apikey=YJw6wpdzRarjhQFYnCJ6",
-           "dataType": "xml",
-           "type": "GET",
-           "cache": false,
-           }
-         
-         $.ajax(settings).done(function (response) {
-           console.log(response);
-           var content = response;
-          // $("#busStats").append(content);           
-          document.getElementById("busStats").innerHTML = response;
-         });
-      }
-      
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 49.2576508, lng: -123.2639868}
-        });
-
-        var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(map);
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbBAeilwetaQpLD44o1sXuWrcIjavvqI0&callback=initMap">
-    </script>
+    
+    
+    
   </body>
 </html>
