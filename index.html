@@ -3,7 +3,8 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Traffic Layer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <title>Translinked - Translink Web Transit Application</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -20,8 +21,27 @@
   </head>
   <body>
     <h1 align="center">this is translinked</h1>
+    <form><input id="textStopNumber" type="text"></form>
+
+    <button type="button" onclick="callAPI()">Submit</button>
+
     <div id="map"></div>
     <script>
+
+
+      function callAPI() {
+                           
+         var settings = {
+           "async": true,
+           "crossDomain": true,
+           "url": "https://api.translink.ca/rttiapi/v1/stops/" + document.getElementByID("textStopNumber") + "?apikey=YJw6wpdzRarjhQFYnCJ6",
+           "method": "GET"
+         }
+         $.ajax(settings).done(function (response) {
+           console.log(response);
+         });
+      }
+      
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 13,
