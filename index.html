@@ -36,7 +36,10 @@
            "async": true,
            "crossDomain": true,
            "url": "https://api.translink.ca/rttiapi/v1/stops/" + document.getElementById("textStopNumber") + "?apikey=YJw6wpdzRarjhQFYnCJ6",
-           "method": "GET"
+           "dataType": "xml",
+           "type": "GET",
+           "cache": false,
+           }
          }
          $.ajax(settings).done(function (response) {
            console.log(response);
