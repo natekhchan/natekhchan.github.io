@@ -21,7 +21,7 @@
   </head>
   <body>
     <h1 align="center">this is translinked</h1>
-    <form><input id="textStopNumber" type="text"></form>
+    <form><input id="textStopNumber" type="text" placeholder="Enter a bus stop number..."></form>
 
     <button type="button" onclick="callAPI()">Submit</button>
     <p>Statistics for bus route</p>
@@ -41,7 +41,8 @@
          $.ajax(settings).done(function (response) {
            console.log(response);
            var content = response;
-          $("#busStats").append(content);           
+          // $("#busStats").append(content);           
+          document.getElementById("busStats").innerHTML = repsonse;
          });
       }
       
