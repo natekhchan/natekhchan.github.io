@@ -24,7 +24,8 @@
     <form><input id="textStopNumber" type="text"></form>
 
     <button type="button" onclick="callAPI()">Submit</button>
-
+    <p>Statistics for bus route</p>
+    <span id="busStats"></span>
     <div id="map"></div>
     <script>
 
@@ -39,6 +40,8 @@
          }
          $.ajax(settings).done(function (response) {
            console.log(response);
+           var content = response;
+          $("#busStats").append(content);           
          });
       }
       
